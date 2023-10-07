@@ -1,34 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { socket } from './libs/socket'
+
 import './App.css'
+import { useEffect, useRef, useState } from 'react'
+import ChatSidebar from './components/ChatSidebar'
+import ChatBox from './components/ChatBox'
+import FriendList from './components/FriendList'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [messages, setMessages] = useState([])
+  const [friends, setFriends] = useState([])
+
+  const lastMessageRef = useRef(null)
+
+  const handleNewMessage = (data) => {
+    console.log('received message : ', data)
+    setMessages((messages) => [...messages, data])
+  }
+
+  const handleRoomConnection = (data) => {
+    console.log('received room connection : ', data)
+    // always set friends to empty array first
+    setFriends(data.users)
+  }
+
+  useEffect(() => {
+    lastMessageRef.current?.scrollIntoView({
+      behavior: 'smooth',
+    })
+  }, [messages])
+
+  useEffect(() => {
+    socket.on('chat:message', handleNewMessage)
+    socket.on('chat:room', handleRoomConnection)
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="chat-container">
+      <ChatSidebar />
+      <ChatBox messages={messages} lastMessageRef={lastMessageRef} />
+      <FriendList friends={friends} />
+    </div>
   )
 }
 
