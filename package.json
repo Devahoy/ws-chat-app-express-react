@@ -1,0 +1,12 @@
+{
+  "name": "chat-app-express-react",
+  "version": "1.0.0",
+  "scripts": {
+    "dev:frontend": "cd chat-app-react && pnpm dev",
+    "dev:api": "cd server && pnpm start",
+    "dev": "concurrently \"pnpm dev:frontend\" \"pnpm dev:api\""
+  },
+  "devDependencies": {
+    "concurrently": "8.2.1"
+  }
+}
