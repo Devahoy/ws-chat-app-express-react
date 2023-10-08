@@ -44,6 +44,7 @@
   width: 240px;
   overflow-y: scroll;
   color: #ccc;
+  font-size: 0.875rem;
 }
 
 .chat-box-messages {
