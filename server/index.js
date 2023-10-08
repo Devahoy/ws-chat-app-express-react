@@ -45,6 +45,7 @@ io.on('connection', (socket) => {
       ...msg,
       id: socket.id + new Date().getTime(),
     })
+    socket.broadcast.emit('chat:typing', { isTyping: false })
   })
 
   socket.on('chat:typing', (msg) => {
