@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 const FriendList = ({ friends }) => {
-  console.log('frrrrrrrrrrr', friends)
   return (
     <div id="chat-friend-list">
       <h3>Friends</h3>
