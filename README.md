@@ -1,6 +1,6 @@
 # ws-chat-app-express-react
 
-บทความ [[Workshop] ทำ Chat Application ด้วย Node.js, Express และ client เป็น React.js](https://devahoy.com/chat-app-react-socket-io/)
+บทความ [[Workshop] ทำ Chat Application ด้วย Node.js, Express และ client เป็น React.js](https://devahoy.com/blog/chat-app-react-socket-io/)
 
 ---
 
